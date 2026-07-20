@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartKey60 — هاتفك هو المفتاح | Your Phone Is The Key</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#070a12;
+    --navy-900:#0a0f1c;
+    --navy-800:#0f1626;
+    --navy-700:#141d33;
+    --slate-500:#5f6b85;
+    --slate-400:#8892a8;
+    --slate-300:#aeb6c8;
+    --cyan-400:#22d3ee;
+    --cyan-300:#67e8f9;
+    --white:#f4f6fb;
+    --radius:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--navy-950);
+    color:var(--white);
+    font-family:'Cairo','Tajawal',sans-serif;
+    overflow-x:hidden;
+    line-height:1.7;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+  /* English inline / block helper: always LTR + Inter, regardless of page direction */
+  .en{
+    direction:ltr;
+    unicode-bidi:isolate;
+    font-family:'Inter',sans-serif;
+  }
+  .en-block{display:block;}
+
+  body::before{
+    content:'';
+    position:fixed;inset:0;
+    background:
+      radial-gradient(600px 400px at 85% -5%, rgba(34,211,238,0.10), transparent 60%),
+      radial-gradient(500px 400px at 10% 15%, rgba(34,211,238,0.06), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(7,10,18,0.85);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:1180px;margin:0 auto;
+    gap:16px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;}
+  .brand svg{width:30px;height:30px;}
+  .navlinks{display:none;gap:26px;font-weight:600;color:var(--slate-300);font-size:14px;}
+  .navlinks a{display:flex;flex-direction:column;align-items:center;line-height:1.3;}
+  .navlinks a .en{font-size:10.5px;color:var(--slate-500);font-weight:600;}
+  .navlinks a:hover{color:var(--cyan-300);}
+  .navlinks a:hover .en{color:var(--cyan-400);}
+  @media(min-width:940px){.navlinks{display:flex;}}
+  .nav-cta{
+    background:var(--cyan-400);color:var(--navy-950);
+    padding:9px 20px;border-radius:100px;font-weight:800;font-size:13.5px;
+    white-space:nowrap;text-align:center;line-height:1.3;
+  }
+  .nav-cta .en{display:block;font-size:10px;font-weight:700;opacity:0.75;}
+  .nav-cta:hover{background:var(--cyan-300);}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;z-index:1;padding:90px 24px 70px;text-align:center;overflow:hidden;}
+  .pulse-ring{position:relative;width:170px;height:170px;margin:0 auto 34px;display:flex;align-items:center;justify-content:center;}
+  .pulse-ring .ring{position:absolute;inset:0;border:1.5px solid rgba(34,211,238,0.35);border-radius:50%;animation:pulse 3s ease-out infinite;}
+  .pulse-ring .ring:nth-child(2){animation-delay:1s;}
+  .pulse-ring .ring:nth-child(3){animation-delay:2s;}
+  @keyframes pulse{0%{transform:scale(0.55);opacity:0.9;}100%{transform:scale(1.3);opacity:0;}}
+  .pulse-ring .core{position:relative;width:96px;height:96px;border-radius:28px;background:linear-gradient(155deg,var(--navy-700),var(--navy-800));border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;box-shadow:0 20px 50px rgba(0,0,0,0.5);}
+  .pulse-ring .core svg{width:50px;height:50px;}
+
+  .eyebrow{
+    display:inline-flex;flex-direction:column;align-items:center;gap:2px;
+    color:var(--cyan-300);font-weight:700;
+    border:1px solid rgba(34,211,238,0.3);
+    padding:8px 20px;border-radius:16px;margin-bottom:26px;
+    background:rgba(34,211,238,0.06);
+  }
+  .eyebrow .ar{font-size:13px;}
+  .eyebrow .en{font-size:10.5px;color:var(--cyan-400);opacity:0.8;letter-spacing:0.5px;}
+
+  h1{font-size:clamp(32px,5.6vw,58px);font-weight:900;line-height:1.25;margin-bottom:8px;letter-spacing:-0.5px;}
+  h1 span.hl{color:var(--cyan-400);}
+  h1 .en-block{
+    font-size:0.35em;font-weight:800;color:var(--slate-300);
+    margin-top:14px;letter-spacing:0.3px;
+  }
+  h1 .en-block span{color:var(--cyan-300);}
+
+  .hero p.lead{color:var(--slate-300);font-size:clamp(16px,2vw,18px);max-width:640px;margin:26px auto 8px;font-weight:500;}
+  .hero p.lead .en-block{
+    display:block;margin-top:12px;font-size:0.82em;color:var(--slate-400);font-weight:400;
+  }
+  .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:40px 0 56px;}
+
+  .btn-primary, .btn-ghost{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    padding:13px 30px;border-radius:18px;line-height:1.3;border:none;cursor:pointer;font-family:inherit;
+  }
+  .btn-primary{background:var(--cyan-400);color:var(--navy-950);box-shadow:0 10px 30px rgba(34,211,238,0.25);}
+  .btn-primary:hover{background:var(--cyan-300);}
+  .btn-primary .ar{font-weight:800;font-size:15px;}
+  .btn-primary .en{font-weight:700;font-size:11px;opacity:0.75;}
+  .btn-ghost{border:1px solid rgba(255,255,255,0.15);color:var(--white);}
+  .btn-ghost:hover{border-color:var(--cyan-400);color:var(--cyan-300);}
+  .btn-ghost .ar{font-weight:700;font-size:15px;}
+  .btn-ghost .en{font-weight:600;font-size:11px;color:var(--slate-400);}
+
+  .store-badges{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .store-badge{display:flex;align-items:center;gap:10px;background:var(--navy-800);border:1px solid rgba(255,255,255,0.08);padding:11px 20px;border-radius:14px;min-width:175px;text-align:start;}
+  .store-badge:hover{border-color:var(--cyan-400);}
+  .store-badge svg{width:26px;height:26px;flex-shrink:0;}
+  .store-badge .sb-text{display:flex;flex-direction:column;line-height:1.3;}
+  .store-badge .sb-small{font-size:10.5px;color:var(--slate-400);}
+  .store-badge .sb-big{font-size:15px;font-weight:800;}
+
+  /* ---------- stat strip ---------- */
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,0.06);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);}
+  @media(min-width:700px){.stats{grid-template-columns:repeat(4,1fr);}}
+  .stat{background:var(--navy-950);padding:30px 20px;text-align:center;}
+  .stat b{display:block;font-size:24px;color:var(--cyan-300);font-weight:900;}
+  .stat .ar{color:var(--slate-300);font-size:13px;font-weight:700;display:block;margin-top:4px;}
+  .stat .en{color:var(--slate-500);font-size:11px;font-weight:600;display:block;margin-top:2px;}
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{position:relative;z-index:1;padding:88px 0;}
+  .sec-head{text-align:center;max-width:680px;margin:0 auto 56px;}
+  .sec-head .tag{color:var(--cyan-300);font-weight:800;font-size:13px;letter-spacing:1px;display:block;margin-bottom:14px;}
+  .sec-head .tag .en{font-size:11px;color:var(--cyan-400);opacity:0.75;margin-inline-start:8px;}
+  .sec-head h2{font-size:clamp(24px,3.8vw,36px);font-weight:900;margin-bottom:6px;}
+  .sec-head h2 .en-block{display:block;font-size:0.44em;color:var(--slate-400);font-weight:700;margin-top:10px;}
+  .sec-head p{color:var(--slate-400);font-size:15.5px;margin-top:14px;}
+  .sec-head p .en-block{display:block;margin-top:8px;font-size:0.92em;color:var(--slate-500);}
+
+  /* ---------- FEATURES ---------- */
+  .features-grid{display:grid;grid-template-columns:1fr;gap:18px;}
+  @media(min-width:640px){.features-grid{grid-template-columns:1fr 1fr;}}
+  @media(min-width:980px){.features-grid{grid-template-columns:1fr 1fr 1fr;}}
+  .feat-card{background:linear-gradient(160deg,var(--navy-800),var(--navy-900));border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:28px 24px;transition:transform .25s, border-color .25s;}
+  .feat-card:hover{transform:translateY(-4px);border-color:rgba(34,211,238,0.35);}
+  .feat-icon{width:50px;height:50px;border-radius:14px;background:rgba(34,211,238,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .feat-icon svg{width:24px;height:24px;stroke:var(--cyan-400);}
+  .feat-card h3{font-size:16.5px;font-weight:800;margin-bottom:2px;}
+  .feat-card h3 .en-block{display:block;font-size:0.68em;font-weight:700;color:var(--cyan-300);margin-top:4px;}
+  .feat-card p{color:var(--slate-400);font-size:13.5px;margin-top:10px;}
+  .feat-card p .en-block{display:block;margin-top:8px;font-size:0.94em;color:var(--slate-500);}
+
+  /* ---------- DIAGRAM ---------- */
+  .diagram{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;background:var(--navy-800);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:46px 26px;}
+  .diag-node{display:flex;flex-direction:column;align-items:center;gap:12px;width:180px;text-align:center;}
+  .diag-node .node-box{width:78px;height:78px;border-radius:20px;background:var(--navy-700);border:1px solid rgba(34,211,238,0.25);display:flex;align-items:center;justify-content:center;}
+  .diag-node .node-box svg{width:34px;height:34px;stroke:var(--cyan-400);}
+  .diag-node h4{font-size:14px;font-weight:800;}
+  .diag-node h4 .en-block{display:block;font-size:0.72em;color:var(--cyan-300);font-weight:700;margin-top:2px;}
+  .diag-node p{font-size:12px;color:var(--slate-400);margin-top:6px;}
+  .diag-node p .en-block{display:block;font-size:0.9em;color:var(--slate-500);margin-top:4px;}
+  .diag-arrow{display:flex;align-items:center;justify-content:center;width:50px;color:var(--cyan-400);position:relative;}
+  .diag-arrow svg{width:100%;}
+  [dir="rtl"] .diag-arrow svg{transform:scaleX(-1);}
+  @media(max-width:700px){
+    .diagram{flex-direction:column;}
+    .diag-arrow{width:2px;height:34px;}
+    .diag-arrow svg{display:none;}
+  }
+
+  .steps{margin-top:56px;display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,0.07);border-radius:var(--radius);overflow:hidden;}
+  @media(min-width:820px){.steps{grid-template-columns:repeat(4,1fr);}}
+  .step{background:var(--navy-900);padding:26px 22px;}
+  .step .num{color:var(--cyan-400);font-weight:900;font-size:12px;letter-spacing:1px;margin-bottom:10px;display:block;}
+  .step h4{font-size:15px;font-weight:800;}
+  .step h4 .en-block{display:block;font-size:0.72em;color:var(--cyan-300);font-weight:700;margin-top:3px;}
+  .step p{color:var(--slate-400);font-size:12.5px;margin-top:8px;}
+  .step p .en-block{display:block;font-size:0.92em;color:var(--slate-500);margin-top:6px;}
+
+  /* ---------- DOWNLOAD ---------- */
+  .download-panel{background:linear-gradient(135deg, var(--navy-800) 0%, var(--navy-900) 60%);border:1px solid rgba(34,211,238,0.2);border-radius:28px;padding:56px 40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:36px;}
+  .download-panel .dl-text{flex:1;min-width:260px;}
+  .download-panel h2{font-size:clamp(22px,3.2vw,30px);font-weight:900;margin-bottom:4px;}
+  .download-panel h2 .en-block{display:block;font-size:0.46em;color:var(--slate-400);font-weight:700;margin-top:8px;}
+  .download-panel p{color:var(--slate-400);margin:16px 0 24px;max-width:440px;font-size:14.5px;}
+  .download-panel p .en-block{display:block;margin-top:8px;font-size:0.92em;color:var(--slate-500);}
+  .qr-box{width:130px;height:130px;background:#fff;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .qr-box svg{width:104px;height:104px;}
+
+  /* ---------- SPECS ---------- */
+  .specs-grid{display:grid;grid-template-columns:1fr;gap:14px;}
+  @media(min-width:700px){.specs-grid{grid-template-columns:1fr 1fr;}}
+  .spec-row{display:flex;align-items:flex-start;gap:14px;background:var(--navy-800);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;}
+  .spec-row .dot{width:10px;height:10px;border-radius:50%;background:var(--cyan-400);margin-top:7px;flex-shrink:0;box-shadow:0 0 12px rgba(34,211,238,0.7);}
+  .spec-row h4{font-size:14.5px;font-weight:800;}
+  .spec-row h4 .en-block{display:block;font-size:0.72em;color:var(--cyan-300);font-weight:700;margin-top:3px;}
+  .spec-row p{color:var(--slate-400);font-size:13px;margin-top:8px;}
+  .spec-row p .en-block{display:block;font-size:0.92em;color:var(--slate-500);margin-top:6px;}
+
+  /* ---------- REGISTRATION FORM ---------- */
+  .reg-wrap{background:var(--navy-800);border:1px solid rgba(255,255,255,0.07);border-radius:28px;padding:44px;display:grid;grid-template-columns:1fr;gap:36px;}
+  @media(min-width:900px){.reg-wrap{grid-template-columns:1fr 1.1fr;padding:52px;}}
+  .reg-info h2{font-size:clamp(22px,3.2vw,30px);font-weight:900;margin-bottom:4px;}
+  .reg-info h2 .en-block{display:block;font-size:0.46em;color:var(--slate-400);font-weight:700;margin-top:8px;}
+  .reg-info p{color:var(--slate-400);margin:14px 0 24px;font-size:14.5px;}
+  .reg-info p .en-block{display:block;margin-top:8px;font-size:0.92em;color:var(--slate-500);}
+  .reg-info ul{list-style:none;display:flex;flex-direction:column;gap:14px;}
+  .reg-info li{display:flex;align-items:flex-start;gap:10px;color:var(--slate-300);font-size:13.5px;font-weight:600;}
+  .reg-info li svg{width:18px;height:18px;stroke:var(--cyan-400);flex-shrink:0;margin-top:2px;}
+  .reg-info li .en{display:block;font-size:0.85em;color:var(--slate-500);font-weight:500;margin-top:2px;}
+
+  form{display:flex;flex-direction:column;gap:16px;}
+  .form-row{display:grid;grid-template-columns:1fr;gap:16px;}
+  @media(min-width:520px){.form-row.two{grid-template-columns:1fr 1fr;}}
+  label{font-size:12.5px;font-weight:700;color:var(--slate-300);margin-bottom:6px;display:block;}
+  label .en{color:var(--slate-500);font-weight:600;font-size:0.9em;margin-inline-start:6px;}
+  input, select{width:100%;background:var(--navy-900);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:13px 16px;color:var(--white);font-family:inherit;font-size:14.5px;outline:none;transition:border-color .2s;}
+  input::placeholder{color:var(--slate-500);}
+  input:focus, select:focus{border-color:var(--cyan-400);}
+  .submit-btn{margin-top:6px;background:var(--cyan-400);color:var(--navy-950);padding:14px;border:none;border-radius:12px;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:2px;}
+  .submit-btn .ar{font-weight:800;font-size:15px;}
+  .submit-btn .en{font-weight:700;font-size:11px;opacity:0.75;}
+  .submit-btn:hover{background:var(--cyan-300);}
+  .form-note{font-size:11.5px;color:var(--slate-500);text-align:center;}
+  .form-note .en-block{display:block;margin-top:4px;}
+  .success-msg{display:none;text-align:center;padding:20px;color:var(--cyan-300);font-weight:700;font-size:14.5px;border:1px dashed rgba(34,211,238,0.4);border-radius:12px;}
+  .success-msg .en-block{display:block;margin-top:6px;font-size:0.85em;color:var(--cyan-400);font-weight:600;}
+
+  /* ---------- FAQ ---------- */
+  .faq-item{border-bottom:1px solid rgba(255,255,255,0.08);padding:20px 4px;cursor:pointer;}
+  .faq-q{display:flex;justify-content:space-between;align-items:flex-start;font-weight:700;font-size:15.5px;gap:16px;}
+  .faq-q .qtext .en-block{display:block;font-size:0.7em;color:var(--slate-500);font-weight:600;margin-top:4px;}
+  .faq-q .plus{color:var(--cyan-400);font-size:22px;transition:transform .25s;flex-shrink:0;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;color:var(--slate-400);font-size:13.5px;}
+  .faq-a .en-block{display:block;margin-top:8px;font-size:0.92em;color:var(--slate-500);}
+  .faq-item.open .faq-a{max-height:260px;margin-top:12px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid rgba(255,255,255,0.07);padding:50px 0 30px;color:var(--slate-500);text-align:center;font-size:13px;}
+  footer .brand{justify-content:center;margin-bottom:14px;}
+  footer .flinks{display:flex;gap:22px;justify-content:center;margin:18px 0;flex-wrap:wrap;font-weight:600;}
+  footer .flinks a{display:flex;flex-direction:column;align-items:center;line-height:1.3;}
+  footer .flinks a .en{font-size:10px;color:var(--slate-500);}
+  footer .flinks a:hover{color:var(--cyan-300);}
+  footer p .en-block{display:block;margin-top:4px;font-size:0.9em;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand">
+      <svg viewBox="0 0 48 48" fill="none">
+        <path d="M6 26c0-3 2-5 5-5h6l6-7c1-1.2 2.4-2 4-2h4" stroke="#22d3ee" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11 21l4-5" stroke="#22d3ee" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="12" cy="30" r="3" fill="#22d3ee"/>
+        <circle cx="34" cy="24" r="9" stroke="#f4f6fb" stroke-width="2.6"/>
+        <circle cx="34" cy="24" r="3" fill="#f4f6fb"/>
+      </svg>
+      <span class="brand-text">SmartKey<span style="color:var(--cyan-400)">60</span></span>
+    </div>
+    <div class="navlinks">
+      <a href="#features">المزايا<span class="en">Features</span></a>
+      <a href="#how">كيف يعمل<span class="en">How It Works</span></a>
+      <a href="#download">التطبيق<span class="en">App</span></a>
+      <a href="#security">الأمان<span class="en">Security</span></a>
+      <a href="#faq">الأسئلة<span class="en">FAQ</span></a>
+    </div>
+    <a href="#register" class="nav-cta">سجّل الآن<span class="en">Register Now</span></a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="pulse-ring">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="core">
+        <svg viewBox="0 0 48 48" fill="none">
+          <path d="M6 26c0-3 2-5 5-5h6l6-7c1-1.2 2.4-2 4-2h4" stroke="#22d3ee" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="30" r="3" fill="#22d3ee"/>
+          <circle cx="34" cy="24" r="9" stroke="#f4f6fb" stroke-width="2.6"/>
+          <circle cx="34" cy="24" r="3" fill="#f4f6fb"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="eyebrow">
+      <span class="ar">جهاز + تطبيق ذكي للتحكم بسيارتك</span>
+      <span class="en">SMART DEVICE + APP FOR VEHICLE CONTROL</span>
+    </div>
+
+    <h1>
+      هاتفك أصبح <span class="hl">مفتاح سيارتك</span>
+      <span class="en-block">Your Phone Is <span>Your Car Key</span></span>
+    </h1>
+
+    <p class="lead">
+      جهاز SmartKey60 يُركَّب داخل سيارتك ويتصل بتطبيق الهاتف عبر البلوتوث وشريحة اتصالات مدمجة، ليمنحك فتحًا وقفلًا تلقائيًا عند الاقتراب، وتحكمًا كاملًا عن بُعد من أي مكان في العالم.
+      <span class="en-block">SmartKey60 installs inside your car and connects to your phone app via Bluetooth and a built-in SIM card — giving you automatic lock/unlock on approach and full remote control from anywhere in the world.</span>
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#register" class="btn-primary">
+        <span class="ar">اطلب جهازك الآن ←</span>
+        <span class="en">Order Your Device →</span>
+      </a>
+      <a href="#how" class="btn-ghost">
+        <span class="ar">شاهد كيف يعمل</span>
+        <span class="en">See How It Works</span>
+      </a>
+    </div>
+
+    <div class="store-badges">
+      <a href="#" target="_blank" rel="noopener" class="store-badge app-store-link">
+        <svg viewBox="0 0 24 24" fill="#f4f6fb"><path d="M17.5 2c.1 1.3-.4 2.5-1.1 3.4-.8.9-2 1.6-3.2 1.5-.2-1.2.4-2.5 1.1-3.3.8-.9 2.2-1.6 3.2-1.6zM20.8 17.2c-.5 1.1-.7 1.6-1.4 2.6-.9 1.4-2.2 3.1-3.8 3.1-1.4 0-1.8-.9-3.7-.9-1.9 0-2.4.9-3.7.9-1.6 0-2.8-1.5-3.7-2.9C2 16.8 1.6 12.6 3.2 10c1-1.6 2.6-2.6 4.2-2.6 1.5 0 2.5 1 3.7 1 1.2 0 2-1 3.7-1 1.4 0 2.9.8 3.9 2.1-3.4 1.9-2.9 6.8.1 8.7z"/></svg>
+        <span class="sb-text"><span class="sb-small en">Download on the</span><span class="sb-big">App Store</span></span>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="store-badge play-store-link">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3.6 2.4L14.6 12 3.6 21.6c-.4-.3-.6-.8-.6-1.3V3.7c0-.5.2-1 .6-1.3z" fill="#22d3ee"/><path d="M14.6 12l3.2-3.2 3.4 1.9c1 .6 1 1.9 0 2.5l-3.4 1.9-3.2-3.1z" fill="#67e8f9"/><path d="M3.6 2.4L14.6 12l3.2-3.2L6.5 2.1c-1-.6-2.1-.4-2.9.3z" fill="#f4f6fb"/><path d="M3.6 21.6L14.6 12l3.2 3.2-11.3 6.4c-1 .6-2.1.4-2.9-.3z" fill="#aeb6c8"/></svg>
+        <span class="sb-text"><span class="sb-small en">GET IT ON</span><span class="sb-big">Google Play</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats wrap" style="max-width:1180px;margin:0 auto;">
+  <div class="stat"><b>&lt;60ms</b><span class="ar">زمن استجابة القفل</span><span class="en">Lock Response Time</span></div>
+  <div class="stat"><b>SHA-256</b><span class="ar">تشفير تحدي واستجابة</span><span class="en">Challenge-Response Encryption</span></div>
+  <div class="stat"><b>GPS</b><span class="ar">تتبع مباشر للموقع</span><span class="en">Live Location Tracking</span></div>
+  <div class="stat"><b>24/7</b><span class="ar">اتصال دائم عبر شريحة SIM</span><span class="en">Always-On SIM Connectivity</span></div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">المزايا <span class="en">· FEATURES</span></span>
+      <h2>كل ما تحتاجه للتحكم بسيارتك<span class="en-block">Everything You Need to Control Your Car</span></h2>
+      <p>منظومة متكاملة من الفتح الآلي عند الاقتراب إلى التحكم الكامل عن بُعد.
+      <span class="en-block">A complete system, from automatic proximity unlock to full remote control.</span></p>
+    </div>
+    <div class="features-grid">
+
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1 3-6z"/></svg></div>
+        <h3>فتح وقفل تلقائي بالاقتراب<span class="en-block">Automatic Proximity Lock/Unlock</span></h3>
+        <p>يكتشف الجهاز وجود هاتفك عبر قياس قوة إشارة البلوتوث (RSSI) ويفتح الأبواب تلقائيًا عند اقترابك، ويقفلها عند ابتعادك.
+        <span class="en-block">The device detects your phone via Bluetooth signal strength (RSSI) and automatically unlocks doors as you approach, then locks them when you leave.</span></p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-6h14l2 6M5 12h14v6H5v-6zM7 18v2M17 18v2"/></svg></div>
+        <h3>فتح الشنطة عن بُعد<span class="en-block">Remote Trunk Release</span></h3>
+        <p>افتح شنطة سيارتك بضغطة واحدة من التطبيق دون الحاجة لإخراج المفتاح التقليدي أو حتى الاقتراب من السيارة.
+        <span class="en-block">Open your trunk with a single tap in the app — no need for a traditional key or walking up to the car.</span></p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
+        <h3>تشغيل المحرك عن بُعد<span class="en-block">Remote Engine Start</span></h3>
+        <p>شغّل محرك السيارة قبل الوصول إليها مباشرة من هاتفك، مثالي في أيام الحر أو البرودة.
+        <span class="en-block">Start the engine before you reach the car, straight from your phone — perfect for hot or cold days.</span></p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <h3>تحديد موقع السيارة<span class="en-block">Real-Time Car Location</span></h3>
+        <p>عبر شريحة الاتصالات المدمجة، يرسل الجهاز موقع سيارتك بدقة في أي وقت، حتى وإن كانت بعيدة عنك بمئات الكيلومترات.
+        <span class="en-block">Thanks to the built-in SIM card, the device reports your car's exact location anytime — even hundreds of kilometers away.</span></p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M4 18h16M9 6h6"/></svg></div>
+        <h3>تحكم كامل عبر الشبكة<span class="en-block">Full Cellular Network Control</span></h3>
+        <p>بفضل شريحة SIM داخل الجهاز، يعمل التحكم عن بُعد من أي مكان في العالم، وليس فقط عبر البلوتوث القريب.
+        <span class="en-block">With an onboard SIM card, remote control works from anywhere in the world — not just over short-range Bluetooth.</span></p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
+        <h3>حماية برمز PIN وتشفير<span class="en-block">PIN Protection &amp; Encryption</span></h3>
+        <p>كل أمر يمر عبر تحدي واستجابة مشفر بمعيار SHA-256، مع جلسات تنتهي صلاحيتها كل 60 ثانية لأقصى درجات الأمان.
+        <span class="en-block">Every command passes through SHA-256 challenge-response encryption, with sessions expiring every 60 seconds for maximum security.</span></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">كيف يعمل <span class="en">· HOW IT WORKS</span></span>
+      <h2>من هاتفك إلى سيارتك في ثوانٍ<span class="en-block">From Your Phone to Your Car in Seconds</span></h2>
+      <p>مخطط مبسّط لمسار الأوامر بين التطبيق وجهاز SmartKey60 المُركّب في السيارة.
+      <span class="en-block">A simplified map of how commands travel between the app and the SmartKey60 device installed in your car.</span></p>
+    </div>
+
+    <div class="diagram">
+      <div class="diag-node">
+        <div class="node-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+        <h4>تطبيق الهاتف<span class="en-block">Phone App</span></h4>
+        <p>إصدار أمر (فتح، قفل، تشغيل...)<span class="en-block">Send a command (unlock, lock, start...)</span></p>
+      </div>
+      <div class="diag-arrow"><svg viewBox="0 0 60 24"><path d="M2 12h50M40 4l12 8-12 8" fill="none" stroke="#22d3ee" stroke-width="2"/></svg></div>
+      <div class="diag-node">
+        <div class="node-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0116 0M7 12a5 5 0 0110 0M10 12a2 2 0 014 0"/></svg></div>
+        <h4>بلوتوث / شبكة SIM<span class="en-block">Bluetooth / SIM Network</span></h4>
+        <p>تشفير الأمر وإرساله للجهاز<span class="en-block">Encrypts the command and sends it to the device</span></p>
+      </div>
+      <div class="diag-arrow"><svg viewBox="0 0 60 24"><path d="M2 12h50M40 4l12 8-12 8" fill="none" stroke="#22d3ee" stroke-width="2"/></svg></div>
+      <div class="diag-node">
+        <div class="node-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2"/></svg></div>
+        <h4>جهاز SmartKey60<span class="en-block">SmartKey60 Device</span></h4>
+        <p>تحقق من الأمر وتنفيذه فورًا<span class="en-block">Verifies the command and executes it instantly</span></p>
+      </div>
+      <div class="diag-arrow"><svg viewBox="0 0 60 24"><path d="M2 12h50M40 4l12 8-12 8" fill="none" stroke="#22d3ee" stroke-width="2"/></svg></div>
+      <div class="diag-node">
+        <div class="node-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-6h14l2 6M5 12h14v6H5v-6z"/></svg></div>
+        <h4>السيارة<span class="en-block">Your Car</span></h4>
+        <p>تنفيذ الفعل: فتح، قفل، تشغيل<span class="en-block">Action performed: unlock, lock, start</span></p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <span class="num">01</span>
+        <h4>تركيب الجهاز<span class="en-block">Device Installation</span></h4>
+        <p>يقوم فريقنا بتركيب SmartKey60 داخل السيارة وربطه بنظام القفل الأصلي خلال أقل من ساعة.
+        <span class="en-block">Our team installs SmartKey60 in your car and connects it to the original lock system in under an hour.</span></p>
+      </div>
+      <div class="step">
+        <span class="num">02</span>
+        <h4>ربط التطبيق<span class="en-block">Link the App</span></h4>
+        <p>حمّل التطبيق، أنشئ حسابك، وقم بمزامنته مع رقم الجهاز التسلسلي الخاص بسيارتك.
+        <span class="en-block">Download the app, create your account, and sync it with your car's device serial number.</span></p>
+      </div>
+      <div class="step">
+        <span class="num">03</span>
+        <h4>الاستخدام اليومي<span class="en-block">Everyday Use</span></h4>
+        <p>احمل هاتفك فقط — الفتح والقفل يتمّان تلقائيًا كلما اقتربت أو ابتعدت عن السيارة.
+        <span class="en-block">Just carry your phone — locking and unlocking happen automatically as you approach or walk away.</span></p>
+      </div>
+      <div class="step">
+        <span class="num">04</span>
+        <h4>تحكم من أي مكان<span class="en-block">Control From Anywhere</span></h4>
+        <p>راقب موقع سيارتك وتحكم بها عن بُعد عبر شبكة الجوال، حتى وأنت في مدينة أخرى.
+        <span class="en-block">Track your car's location and control it remotely over the cellular network, even from another city.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download">
+  <div class="wrap">
+    <div class="download-panel">
+      <div class="dl-text">
+        <h2>حمّل تطبيق SmartKey60<span class="en-block">Download the SmartKey60 App</span></h2>
+        <p>متوفر لأجهزة الأندرويد والآيفون. اربطه بجهازك خلال دقائق وابدأ التحكم بسيارتك من هاتفك.
+        <span class="en-block">Available for Android and iPhone. Pair it with your device in minutes and start controlling your car from your phone.</span></p>
+        <div class="store-badges" style="justify-content:flex-start;">
+          <a href="#" target="_blank" rel="noopener" class="store-badge app-store-link">
+            <svg viewBox="0 0 24 24" fill="#f4f6fb"><path d="M17.5 2c.1 1.3-.4 2.5-1.1 3.4-.8.9-2 1.6-3.2 1.5-.2-1.2.4-2.5 1.1-3.3.8-.9 2.2-1.6 3.2-1.6zM20.8 17.2c-.5 1.1-.7 1.6-1.4 2.6-.9 1.4-2.2 3.1-3.8 3.1-1.4 0-1.8-.9-3.7-.9-1.9 0-2.4.9-3.7.9-1.6 0-2.8-1.5-3.7-2.9C2 16.8 1.6 12.6 3.2 10c1-1.6 2.6-2.6 4.2-2.6 1.5 0 2.5 1 3.7 1 1.2 0 2-1 3.7-1 1.4 0 2.9.8 3.9 2.1-3.4 1.9-2.9 6.8.1 8.7z"/></svg>
+            <span class="sb-text"><span class="sb-small en">Download on the</span><span class="sb-big">App Store</span></span>
+          </a>
+          <a href="#" target="_blank" rel="noopener" class="store-badge play-store-link">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3.6 2.4L14.6 12 3.6 21.6c-.4-.3-.6-.8-.6-1.3V3.7c0-.5.2-1 .6-1.3z" fill="#22d3ee"/><path d="M14.6 12l3.2-3.2 3.4 1.9c1 .6 1 1.9 0 2.5l-3.4 1.9-3.2-3.1z" fill="#67e8f9"/><path d="M3.6 2.4L14.6 12l3.2-3.2L6.5 2.1c-1-.6-2.1-.4-2.9.3z" fill="#f4f6fb"/><path d="M3.6 21.6L14.6 12l3.2 3.2-11.3 6.4c-1 .6-2.1.4-2.9-.3z" fill="#aeb6c8"/></svg>
+            <span class="sb-text"><span class="sb-small en">GET IT ON</span><span class="sb-big">Google Play</span></span>
+          </a>
+        </div>
+      </div>
+      <div class="qr-box">
+        <svg viewBox="0 0 100 100">
+          <rect width="100" height="100" fill="#fff"/>
+          <g fill="#0a0f1c">
+            <rect x="8" y="8" width="24" height="24"/><rect x="14" y="14" width="12" height="12" fill="#fff"/><rect x="18" y="18" width="4" height="4"/>
+            <rect x="68" y="8" width="24" height="24"/><rect x="74" y="14" width="12" height="12" fill="#fff"/><rect x="78" y="18" width="4" height="4"/>
+            <rect x="8" y="68" width="24" height="24"/><rect x="14" y="74" width="12" height="12" fill="#fff"/><rect x="18" y="78" width="4" height="4"/>
+            <rect x="40" y="8" width="6" height="6"/><rect x="50" y="8" width="6" height="6"/><rect x="40" y="20" width="6" height="6"/><rect x="56" y="20" width="6" height="6"/>
+            <rect x="40" y="40" width="6" height="6"/><rect x="50" y="40" width="6" height="6"/><rect x="60" y="40" width="6" height="6"/><rect x="70" y="40" width="6" height="6"/><rect x="80" y="40" width="6" height="6"/>
+            <rect x="40" y="52" width="6" height="6"/><rect x="60" y="52" width="6" height="6"/><rect x="8" y="52" width="6" height="6"/><rect x="20" y="52" width="6" height="6"/>
+            <rect x="70" y="60" width="6" height="6"/><rect x="80" y="70" width="6" height="6"/><rect x="60" y="80" width="6" height="6"/><rect x="40" y="70" width="6" height="6"/><rect x="50" y="86" width="6" height="6"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section id="security">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">الأمان والتقنية <span class="en">· SECURITY &amp; TECH</span></span>
+      <h2>مبني على أسس تشفير صارمة<span class="en-block">Built on Rigorous Encryption Standards</span></h2>
+      <p>نأخذ أمان سيارتك بجدّية؛ كل اتصال بين الهاتف والجهاز محمي بعدة طبقات.
+      <span class="en-block">We take your car's security seriously — every connection between phone and device is protected by multiple layers.</span></p>
+    </div>
+    <div class="specs-grid">
+      <div class="spec-row"><span class="dot"></span><div>
+        <h4>تشفير التحدي والاستجابة<span class="en-block">Challenge-Response Encryption</span></h4>
+        <p>كل أمر يُوقَّع بمفتاح فريد بمعيار SHA-256 لمنع اعتراض الإشارة أو إعادة استخدامها.
+        <span class="en-block">Every command is signed with a unique SHA-256 key to prevent signal interception or replay attacks.</span></p>
+      </div></div>
+      <div class="spec-row"><span class="dot"></span><div>
+        <h4>جلسات مؤقتة<span class="en-block">Time-Limited Sessions</span></h4>
+        <p>تنتهي صلاحية كل جلسة اتصال تلقائيًا بعد 60 ثانية، فلا يبقى أي اتصال مفتوحًا دون داعٍ.
+        <span class="en-block">Every connection session automatically expires after 60 seconds, so no connection stays open unnecessarily.</span></p>
+      </div></div>
+      <div class="spec-row"><span class="dot"></span><div>
+        <h4>رمز PIN إضافي<span class="en-block">Additional PIN Code</span></h4>
+        <p>يمكنك تفعيل رمز حماية إضافي للعمليات الحساسة مثل تشغيل المحرك أو فتح الشنطة عن بُعد.
+        <span class="en-block">Enable an extra protection code for sensitive actions like remote engine start or trunk release.</span></p>
+      </div></div>
+      <div class="spec-row"><span class="dot"></span><div>
+        <h4>اتصال مزدوج: بلوتوث + شريحة اتصالات<span class="en-block">Dual Connectivity: Bluetooth + SIM</span></h4>
+        <p>يعمل الجهاز بالبلوتوث للتحكم القريب، وبشريحة SIM مدمجة للتحكم وتحديد الموقع من أي مكان.
+        <span class="en-block">Bluetooth handles close-range control, while a built-in SIM enables remote control and location tracking from anywhere.</span></p>
+      </div></div>
+      <div class="spec-row"><span class="dot"></span><div>
+        <h4>سجلّ نشاط كامل<span class="en-block">Complete Activity Log</span></h4>
+        <p>راجع في التطبيق كل عملية فتح وقفل وتشغيل، مع الوقت والموقع، من لوحة تحكم مطوّرة.
+        <span class="en-block">Review every lock, unlock, and start event in the app, with time and location, from an advanced dashboard.</span></p>
+      </div></div>
+      <div class="spec-row"><span class="dot"></span><div>
+        <h4>كشف الاقتراب بدقة (RSSI)<span class="en-block">Precise Proximity Detection (RSSI)</span></h4>
+        <p>يقيس الجهاز قوة إشارة هاتفك باستمرار ليحدد بدقة لحظة اقترابك أو ابتعادك عن السيارة.
+        <span class="en-block">The device continuously measures your phone's signal strength to precisely detect when you approach or leave.</span></p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRATION -->
+<section id="register">
+  <div class="wrap">
+    <div class="reg-wrap">
+      <div class="reg-info">
+        <h2>احجز جهازك الآن<span class="en-block">Reserve Your Device Now</span></h2>
+        <p>سجّل بياناتك وسيتواصل معك فريقنا لتحديد موعد التركيب واختيار الباقة المناسبة لسيارتك.
+        <span class="en-block">Register your details and our team will contact you to schedule installation and choose the right package.</span></p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <div>تركيب احترافي في أقل من ساعة<span class="en">Professional installation in under an hour</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <div>ضمان على الجهاز والتركيب<span class="en">Warranty on device and installation</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <div>دعم فني متواصل عبر التطبيق<span class="en">Ongoing technical support via the app</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <div>يعمل مع معظم أنواع السيارات<span class="en">Works with most car makes and models</span></div></li>
+        </ul>
+      </div>
+      <div>
+        <form id="regForm">
+          <div class="form-row">
+            <div>
+              <label>الاسم الكامل <span class="en">Full Name</span></label>
+              <input type="text" id="regName" placeholder="اكتب اسمك — Enter your name" required>
+            </div>
+          </div>
+          <div class="form-row two">
+            <div>
+              <label>رقم الجوال <span class="en">Phone Number</span></label>
+              <input type="tel" id="regPhone" placeholder="05xxxxxxxx" required>
+            </div>
+            <div>
+              <label>البريد الإلكتروني <span class="en">Email Address</span></label>
+              <input type="email" id="regEmail" placeholder="example@email.com">
+            </div>
+          </div>
+          <div class="form-row two">
+            <div>
+              <label>نوع السيارة <span class="en">Car Model</span></label>
+              <input type="text" id="regCar" placeholder="مثال: تويوتا كامري 2022" required>
+            </div>
+            <div>
+              <label>المدينة <span class="en">City</span></label>
+              <select id="regCity">
+                <option>الرياض — Riyadh</option>
+                <option>جدة — Jeddah</option>
+                <option>الدمام — Dammam</option>
+                <option>مكة المكرمة — Makkah</option>
+                <option>مدينة أخرى — Other City</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn">
+            <span class="ar">إرسال طلب التسجيل</span>
+            <span class="en">Submit Registration</span>
+          </button>
+          <p class="form-note">بإرسالك للطلب فأنت توافق على تواصل فريق SmartKey60 معك.
+          <span class="en-block">By submitting, you agree to be contacted by the SmartKey60 team.</span></p>
+          <div class="success-msg" id="successMsg">✓ تم استلام طلبك بنجاح! سنتواصل معك قريبًا.
+          <span class="en-block">Your request has been received! We'll be in touch shortly.</span></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap" style="max-width:840px;">
+    <div class="sec-head">
+      <span class="tag">الأسئلة الشائعة <span class="en">· FAQ</span></span>
+      <h2>كل ما تريد معرفته<span class="en-block">Everything You Want to Know</span></h2>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><div class="qtext">هل يعمل الجهاز مع جميع أنواع السيارات؟<span class="en-block">Does the device work with all car types?</span></div><span class="plus">+</span></div>
+      <div class="faq-a">نعم، تم تصميم SmartKey60 للعمل مع غالبية السيارات الحديثة التي تحتوي على نظام قفل مركزي، ويقوم فريقنا بفحص التوافق قبل التركيب.
+      <span class="en-block">Yes — SmartKey60 is designed to work with most modern cars equipped with central locking. Our team checks compatibility before installation.</span></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><div class="qtext">ماذا يحدث إذا انقطعت شبكة الجوال؟<span class="en-block">What happens if the cellular network drops?</span></div><span class="plus">+</span></div>
+      <div class="faq-a">يعمل الفتح والقفل التلقائي عبر البلوتوث حتى دون شبكة، بينما يحتاج التحكم عن بُعد من مسافات بعيدة إلى تغطية شريحة الاتصالات.
+      <span class="en-block">Automatic lock/unlock still works over Bluetooth without a network, while long-range remote control requires cellular coverage.</span></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><div class="qtext">هل يمكن إضافة أكثر من هاتف كمفتاح؟<span class="en-block">Can I add more than one phone as a key?</span></div><span class="plus">+</span></div>
+      <div class="faq-a">نعم، يمكنك ربط عدة هواتف بجهاز واحد ومنح كل مستخدم صلاحيات مختلفة من خلال لوحة التحكم في التطبيق.
+      <span class="en-block">Yes — you can link multiple phones to a single device and grant each user different permissions from the app's control panel.</span></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><div class="qtext">كم تستغرق عملية التركيب؟<span class="en-block">How long does installation take?</span></div><span class="plus">+</span></div>
+      <div class="faq-a">عادة ما تستغرق عملية التركيب أقل من ساعة على يد فنيين متخصصين، دون التأثير على أنظمة السيارة الأصلية.
+      <span class="en-block">Installation typically takes under an hour with specialized technicians, without affecting the car's original systems.</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 48 48" fill="none">
+        <path d="M6 26c0-3 2-5 5-5h6l6-7c1-1.2 2.4-2 4-2h4" stroke="#22d3ee" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="12" cy="30" r="3" fill="#22d3ee"/>
+        <circle cx="34" cy="24" r="9" stroke="#f4f6fb" stroke-width="2.6"/>
+        <circle cx="34" cy="24" r="3" fill="#f4f6fb"/>
+      </svg>
+      SmartKey60
+    </div>
+    <div class="flinks">
+      <a href="#features">المزايا<span class="en">Features</span></a>
+      <a href="#how">كيف يعمل<span class="en">How It Works</span></a>
+      <a href="#security">الأمان<span class="en">Security</span></a>
+      <a href="#register">سجّل الآن<span class="en">Register</span></a>
+    </div>
+    <p style="margin-bottom:4px;">
+      <span class="ar">للتواصل:</span> <a href="mailto:sales@pom-agency.com" class="en" style="color:var(--cyan-300);">sales@pom-agency.com</a>
+    </p>
+    <p>© 2026 SmartKey60. جميع الحقوق محفوظة.<span class="en-block">© 2026 SmartKey60. All rights reserved.</span></p>
+    <p style="margin-top:6px;">Powered by POM Agency</p>
+  </div>
+</footer>
+
+<script>
+  /* ====== ضع روابط التطبيقين هنا فقط — تُطبَّق تلقائيًا على كل أزرار التحميل بالصفحة ====== */
+  /* ====== PUT YOUR APP LINKS HERE ONLY — auto-applied to every download button on the page ====== */
+  const APP_STORE_URL   = "https://apps.apple.com/app/idXXXXXXXXX";                         // رابط تطبيق الآيفون (App Store)
+  const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.smartkey.app"; // رابط تطبيق الأندرويد (Google Play)
+
+  document.querySelectorAll('.app-store-link').forEach(a => a.href = APP_STORE_URL);
+  document.querySelectorAll('.play-store-link').forEach(a => a.href = GOOGLE_PLAY_URL);
+
+  /* ====== بريد استقبال طلبات التسجيل ====== */
+  const SALES_EMAIL = "sales@pom-agency.com";
+
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.addEventListener('click',()=>{ item.classList.toggle('open'); });
+  });
+
+  document.getElementById('regForm').addEventListener('submit',function(e){
+    e.preventDefault();
+
+    const name  = document.getElementById('regName').value;
+    const phone = document.getElementById('regPhone').value;
+    const email = document.getElementById('regEmail').value;
+    const car   = document.getElementById('regCar').value;
+    const city  = document.getElementById('regCity').value;
+
+    const subject = "طلب تسجيل جديد - SmartKey60 / New Registration";
+    const body =
+`الاسم / Name: ${name}
+رقم الجوال / Phone: ${phone}
+البريد الإلكتروني / Email: ${email}
+نوع السيارة / Car Model: ${car}
+المدينة / City: ${city}`;
+
+    const mailtoLink = `mailto:${SALES_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+
+    document.getElementById('successMsg').style.display='block';
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
