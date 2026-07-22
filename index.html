@@ -183,15 +183,15 @@
   .feat-card p .en-block{display:block;margin-top:8px;font-size:0.94em;color:var(--slate-500);}
 
   /* ---------- DIAGRAM ---------- */
-  .diagram{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;background:var(--navy-800);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:46px 26px;}
-  .diag-node{display:flex;flex-direction:column;align-items:center;gap:12px;width:180px;text-align:center;}
+  .diagram{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;background:var(--navy-800);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:44px 16px;}
+  .diag-node{display:flex;flex-direction:column;align-items:center;gap:12px;width:240px;text-align:center;}
   .diag-node .node-box{width:78px;height:78px;border-radius:20px;background:var(--navy-700);border:1px solid rgba(34,211,238,0.25);display:flex;align-items:center;justify-content:center;}
   .diag-node .node-box svg{width:34px;height:34px;stroke:var(--cyan-400);}
   .diag-node h4{font-size:14px;font-weight:800;}
   .diag-node h4 .en-block{display:block;font-size:0.72em;color:var(--cyan-300);font-weight:700;margin-top:2px;}
   .diag-node p{font-size:12px;color:var(--slate-400);margin-top:6px;}
   .diag-node p .en-block{display:block;font-size:0.9em;color:var(--slate-500);margin-top:4px;}
-  .diag-arrow{display:flex;align-items:center;justify-content:center;width:50px;color:var(--cyan-400);position:relative;}
+  .diag-arrow{display:flex;align-items:center;justify-content:center;width:34px;color:var(--cyan-400);position:relative;}
   .diag-arrow svg{width:100%;}
   [dir="rtl"] .diag-arrow svg{transform:scaleX(-1);}
   @media(max-width:700px){
@@ -758,22 +758,42 @@
     qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=0&data=' + encodeURIComponent(SITE_URL);
   }
 
-  /* Autoplay each diagram-node video when it scrolls into view, pause when
-     it leaves. Works for every .node-box.has-video. */
-  const nodeVideos = document.querySelectorAll('.node-box.has-video video');
+  /* Play the diagram videos one after another: video 1 first, then 2, 3, 4,
+     then loop back to 1. The sequence runs while the diagram is on screen. */
+  const nodeVideos = Array.from(document.querySelectorAll('.node-box.has-video video'));
   if (nodeVideos.length) {
+    let current = 0;
+    let inView  = false;
+
+    nodeVideos.forEach(v => { v.loop = false; });
+
+    function playCurrent() {
+      if (!inView) return;
+      nodeVideos[current].play().catch(() => {});
+    }
+
+    /* When one finishes, reset it and hand off to the next in sequence */
+    nodeVideos.forEach((video, i) => {
+      video.addEventListener('ended', () => {
+        video.currentTime = 0;
+        current = (i + 1) % nodeVideos.length;
+        playCurrent();
+      });
+    });
+
+    const diagram = document.querySelector('#how .diagram') || nodeVideos[0];
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          const video = entry.target;
-          if (entry.isIntersecting) video.play().catch(() => {});
-          else video.pause();
+          inView = entry.isIntersecting;
+          if (inView) playCurrent();
+          else nodeVideos[current].pause();
         });
       }, { threshold: 0.35 });
-      nodeVideos.forEach(video => io.observe(video));
+      io.observe(diagram);
     } else {
-      /* Fallback: just start them */
-      nodeVideos.forEach(video => video.play().catch(() => {}));
+      inView = true;
+      playCurrent();
     }
   }
 
