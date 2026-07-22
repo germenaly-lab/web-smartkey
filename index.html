@@ -209,6 +209,11 @@
   .step p{color:var(--slate-400);font-size:12.5px;margin-top:8px;}
   .step p .en-block{display:block;font-size:0.92em;color:var(--slate-500);margin-top:6px;}
 
+  /* ---------- DIAGRAM NODE VIDEO ---------- */
+  .diag-node .node-box.has-video{padding:0;overflow:hidden;cursor:pointer;transition:transform .25s, border-color .25s;}
+  .diag-node .node-box.has-video:hover{transform:scale(1.06);border-color:rgba(34,211,238,0.55);}
+  .diag-node .node-box.has-video .node-video{width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;}
+
   /* ---------- DOWNLOAD ---------- */
   .download-panel{background:linear-gradient(135deg, var(--navy-800) 0%, var(--navy-900) 60%);border:1px solid rgba(34,211,238,0.2);border-radius:28px;padding:56px 40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:36px;}
   .download-panel .dl-text{flex:1;min-width:260px;}
@@ -440,25 +445,45 @@
 
     <div class="diagram">
       <div class="diag-node">
-        <div class="node-box"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+        <div class="node-box has-video">
+          <video class="node-video" muted loop playsinline preload="metadata"
+                 poster="https://res.cloudinary.com/bolegegt/video/upload/so_0/WhatsApp_Video_2026-07-22_at_2.11.06_PM_cff71s.jpg">
+            <source src="https://res.cloudinary.com/bolegegt/video/upload/WhatsApp_Video_2026-07-22_at_2.11.06_PM_cff71s.mp4" type="video/mp4">
+          </video>
+        </div>
         <h4>تطبيق الهاتف<span class="en-block">Phone App</span></h4>
         <p>إصدار أمر (فتح، قفل، تشغيل...)<span class="en-block">Send a command (unlock, lock, start...)</span></p>
       </div>
       <div class="diag-arrow"><svg aria-hidden="true" viewBox="0 0 60 24"><path d="M2 12h50M40 4l12 8-12 8" fill="none" stroke="#22d3ee" stroke-width="2"/></svg></div>
       <div class="diag-node">
-        <div class="node-box"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0116 0M7 12a5 5 0 0110 0M10 12a2 2 0 014 0"/></svg></div>
+        <div class="node-box has-video">
+          <video class="node-video" muted loop playsinline preload="metadata"
+                 poster="https://res.cloudinary.com/bolegegt/video/upload/so_0/WhatsApp_Video_2026-07-22_at_2.11.06_PM_1_sv876q.jpg">
+            <source src="https://res.cloudinary.com/bolegegt/video/upload/WhatsApp_Video_2026-07-22_at_2.11.06_PM_1_sv876q.mp4" type="video/mp4">
+          </video>
+        </div>
         <h4>بلوتوث / شبكة SIM<span class="en-block">Bluetooth / SIM Network</span></h4>
         <p>تشفير الأمر وإرساله للجهاز<span class="en-block">Encrypts the command and sends it to the device</span></p>
       </div>
       <div class="diag-arrow"><svg aria-hidden="true" viewBox="0 0 60 24"><path d="M2 12h50M40 4l12 8-12 8" fill="none" stroke="#22d3ee" stroke-width="2"/></svg></div>
       <div class="diag-node">
-        <div class="node-box"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2"/></svg></div>
+        <div class="node-box has-video">
+          <video class="node-video" muted loop playsinline preload="metadata"
+                 poster="https://res.cloudinary.com/bolegegt/video/upload/so_0/WhatsApp_Video_2026-07-22_at_2.11.06_PM_3_p1s4hy.jpg">
+            <source src="https://res.cloudinary.com/bolegegt/video/upload/WhatsApp_Video_2026-07-22_at_2.11.06_PM_3_p1s4hy.mp4" type="video/mp4">
+          </video>
+        </div>
         <h4>جهاز SmartKey60<span class="en-block">SmartKey60 Device</span></h4>
         <p>تحقق من الأمر وتنفيذه فورًا<span class="en-block">Verifies the command and executes it instantly</span></p>
       </div>
       <div class="diag-arrow"><svg aria-hidden="true" viewBox="0 0 60 24"><path d="M2 12h50M40 4l12 8-12 8" fill="none" stroke="#22d3ee" stroke-width="2"/></svg></div>
       <div class="diag-node">
-        <div class="node-box"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-6h14l2 6M5 12h14v6H5v-6z"/></svg></div>
+        <div class="node-box has-video">
+          <video class="node-video" muted loop playsinline preload="metadata"
+                 poster="https://res.cloudinary.com/bolegegt/video/upload/so_0/WhatsApp_Video_2026-07-22_at_2.11.06_PM_2_tycqo0.jpg">
+            <source src="https://res.cloudinary.com/bolegegt/video/upload/WhatsApp_Video_2026-07-22_at_2.11.06_PM_2_tycqo0.mp4" type="video/mp4">
+          </video>
+        </div>
         <h4>السيارة<span class="en-block">Your Car</span></h4>
         <p>تنفيذ الفعل: فتح، قفل، تشغيل<span class="en-block">Action performed: unlock, lock, start</span></p>
       </div>
@@ -732,6 +757,24 @@
   if (qrImg) {
     qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=0&data=' + encodeURIComponent(SITE_URL);
   }
+
+  /* Play each diagram-node video on hover, reset when the pointer leaves.
+     Works for every .node-box.has-video, so the remaining boxes will
+     behave the same once their videos are added. */
+  document.querySelectorAll('.node-box.has-video').forEach(box => {
+    const video = box.querySelector('video');
+    if (!video) return;
+    box.addEventListener('mouseenter', () => { video.play().catch(() => {}); });
+    box.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+    /* Touch devices: tap to toggle play/pause */
+    box.addEventListener('click', () => {
+      if (video.paused) video.play().catch(() => {});
+      else video.pause();
+    });
+  });
 
   document.querySelectorAll('.faq-q').forEach(btn=>{
     btn.addEventListener('click',()=>{
