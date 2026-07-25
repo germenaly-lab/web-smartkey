@@ -210,9 +210,42 @@
   .step p .en-block{display:block;font-size:0.92em;color:var(--slate-500);margin-top:6px;}
 
   /* ---------- DIAGRAM NODE VIDEO ---------- */
-  .diag-node .node-box.has-video{width:100%;height:auto;aspect-ratio:4/3;padding:0;overflow:hidden;transition:border-color .25s;}
+  .diag-node .node-box.has-video{
+    position:relative;
+    width:100%;height:auto;aspect-ratio:4/3;padding:0;overflow:hidden;
+    transition:border-color .25s, box-shadow .25s;
+    cursor:pointer;
+  }
   .diag-node .node-box.has-video:hover{border-color:rgba(34,211,238,0.55);}
   .diag-node .node-box.has-video .node-video{width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;}
+  .diag-node .node-box.has-video .play-overlay{
+    position:absolute;inset:0;
+    background:rgba(7,10,18,0.45);
+    backdrop-filter:blur(1.5px);
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity .3s ease;
+    border-radius:inherit;
+    z-index:2;
+  }
+  .diag-node .node-box.has-video .play-overlay .btn-play-circle{
+    width:48px;height:48px;border-radius:50%;
+    background:var(--cyan-400);color:var(--navy-950);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 20px rgba(34,211,238,0.5);
+    transition:transform .2s ease, background-color .2s ease;
+  }
+  .diag-node .node-box.has-video:hover .play-overlay .btn-play-circle{
+    transform:scale(1.12);
+    background:var(--cyan-300);
+  }
+  .diag-node .node-box.has-video.is-playing .play-overlay{
+    opacity:0;
+    pointer-events:none;
+  }
+  .diag-node .node-box.has-video.is-playing{
+    border-color:var(--cyan-400);
+    box-shadow:0 0 20px rgba(34,211,238,0.35);
+  }
 
   /* ---------- DOWNLOAD ---------- */
   .download-panel{background:linear-gradient(135deg, var(--navy-800) 0%, var(--navy-900) 60%);border:1px solid rgba(34,211,238,0.2);border-radius:28px;padding:56px 40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:36px;}
@@ -445,48 +478,78 @@
 
     <div class="diagram">
       <div class="diag-node">
-        <div class="node-box has-video">
+        <div class="node-box has-video" tabindex="0" role="button" aria-label="Play Video 1">
           <video class="node-video" muted loop playsinline preload="metadata"
                  poster="https://res.cloudinary.com/bolegegt/video/upload/so_0/WhatsApp_Video_2026-07-22_at_2.11.06_PM_cff71s.jpg">
             <source src="https://res.cloudinary.com/bolegegt/video/upload/WhatsApp_Video_2026-07-22_at_2.11.06_PM_cff71s.mp4" type="video/mp4">
           </video>
+          <div class="play-overlay" title="تشغيل / Play">
+            <div class="btn-play-circle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
         </div>
         <h4>تطبيق الهاتف<span class="en-block">Phone App</span></h4>
         <p>إصدار أمر (فتح، قفل، تشغيل...)<span class="en-block">Send a command (unlock, lock, start...)</span></p>
       </div>
       <div class="diag-arrow"><svg aria-hidden="true" viewBox="0 0 60 24"><path d="M2 12h50M40 4l12 8-12 8" fill="none" stroke="#22d3ee" stroke-width="2"/></svg></div>
       <div class="diag-node">
-        <div class="node-box has-video">
+        <div class="node-box has-video" tabindex="0" role="button" aria-label="Play Video 2">
           <video class="node-video" muted loop playsinline preload="metadata"
                  poster="https://res.cloudinary.com/bolegegt/video/upload/so_0/WhatsApp_Video_2026-07-22_at_2.11.06_PM_1_sv876q.jpg">
             <source src="https://res.cloudinary.com/bolegegt/video/upload/WhatsApp_Video_2026-07-22_at_2.11.06_PM_1_sv876q.mp4" type="video/mp4">
           </video>
+          <div class="play-overlay" title="تشغيل / Play">
+            <div class="btn-play-circle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
         </div>
         <h4>بلوتوث / شبكة SIM<span class="en-block">Bluetooth / SIM Network</span></h4>
         <p>تشفير الأمر وإرساله للجهاز<span class="en-block">Encrypts the command and sends it to the device</span></p>
       </div>
       <div class="diag-arrow"><svg aria-hidden="true" viewBox="0 0 60 24"><path d="M2 12h50M40 4l12 8-12 8" fill="none" stroke="#22d3ee" stroke-width="2"/></svg></div>
       <div class="diag-node">
-        <div class="node-box has-video">
+        <div class="node-box has-video" tabindex="0" role="button" aria-label="Play Video 3">
           <video class="node-video" muted loop playsinline preload="metadata"
                  poster="https://res.cloudinary.com/bolegegt/video/upload/so_0/WhatsApp_Video_2026-07-22_at_2.11.06_PM_3_p1s4hy.jpg">
             <source src="https://res.cloudinary.com/bolegegt/video/upload/WhatsApp_Video_2026-07-22_at_2.11.06_PM_3_p1s4hy.mp4" type="video/mp4">
           </video>
+          <div class="play-overlay" title="تشغيل / Play">
+            <div class="btn-play-circle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
         </div>
         <h4>جهاز SmartKey60<span class="en-block">SmartKey60 Device</span></h4>
         <p>تحقق من الأمر وتنفيذه فورًا<span class="en-block">Verifies the command and executes it instantly</span></p>
       </div>
       <div class="diag-arrow"><svg aria-hidden="true" viewBox="0 0 60 24"><path d="M2 12h50M40 4l12 8-12 8" fill="none" stroke="#22d3ee" stroke-width="2"/></svg></div>
       <div class="diag-node">
-        <div class="node-box has-video">
+        <div class="node-box has-video" tabindex="0" role="button" aria-label="Play Video 4">
           <video class="node-video" muted loop playsinline preload="metadata"
                  poster="https://res.cloudinary.com/bolegegt/video/upload/so_0/WhatsApp_Video_2026-07-22_at_2.11.06_PM_2_tycqo0.jpg">
             <source src="https://res.cloudinary.com/bolegegt/video/upload/WhatsApp_Video_2026-07-22_at_2.11.06_PM_2_tycqo0.mp4" type="video/mp4">
           </video>
+          <div class="play-overlay" title="تشغيل / Play">
+            <div class="btn-play-circle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
         </div>
         <h4>السيارة<span class="en-block">Your Car</span></h4>
         <p>تنفيذ الفعل: فتح، قفل، تشغيل<span class="en-block">Action performed: unlock, lock, start</span></p>
       </div>
+    </div>
+
+    <div style="text-align:center;margin-top:28px;">
+      <button id="toggleDiagramBtn" class="btn-primary" type="button" style="display:inline-flex;flex-direction:row;gap:12px;align-items:center;padding:12px 28px;margin:0 auto;cursor:pointer;">
+        <svg class="play-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <div style="display:flex;flex-direction:column;align-items:flex-start;text-align:start;line-height:1.2;">
+          <span class="ar" style="font-weight:800;font-size:15px;">تشغيل العرض التوضيحي</span>
+          <span class="en" style="font-weight:700;font-size:11px;opacity:0.8;">Play Demo Sequence</span>
+        </div>
+      </button>
     </div>
 
     <div class="steps">
@@ -759,41 +822,123 @@
   }
 
   /* Play the diagram videos one after another: video 1 first, then 2, 3, 4,
-     then loop back to 1. The sequence runs while the diagram is on screen. */
-  const nodeVideos = Array.from(document.querySelectorAll('.node-box.has-video video'));
+     then loop back to 1. Controlled via play buttons & auto-play sequence. */
+  const nodeBoxes = Array.from(document.querySelectorAll('.node-box.has-video'));
+  const nodeVideos = nodeBoxes.map(box => box.querySelector('video'));
+  const toggleDiagramBtn = document.getElementById('toggleDiagramBtn');
+
   if (nodeVideos.length) {
     let current = 0;
-    let inView  = false;
+    let inView = false;
+    let isSequencePlaying = false;
 
     nodeVideos.forEach(v => { v.loop = false; });
 
-    function playCurrent() {
-      if (!inView) return;
-      nodeVideos[current].play().catch(() => {});
+    function updateButtonUI(playing) {
+      if (!toggleDiagramBtn) return;
+      const arText = toggleDiagramBtn.querySelector('.ar');
+      const enText = toggleDiagramBtn.querySelector('.en');
+      const icon = toggleDiagramBtn.querySelector('.play-icon');
+
+      if (playing) {
+        if (arText) arText.textContent = 'إيقاف مؤقت للعرض';
+        if (enText) enText.textContent = 'Pause Demo Sequence';
+        if (icon) icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+      } else {
+        if (arText) arText.textContent = 'تشغيل العرض التوضيحي';
+        if (enText) enText.textContent = 'Play Demo Sequence';
+        if (icon) icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+      }
     }
 
-    /* When one finishes, reset it and hand off to the next in sequence */
+    function stopAllVideos() {
+      nodeVideos.forEach((v, idx) => {
+        v.pause();
+        nodeBoxes[idx].classList.remove('is-playing');
+      });
+      isSequencePlaying = false;
+      updateButtonUI(false);
+    }
+
+    function playIndex(idx) {
+      stopAllVideos();
+      current = idx % nodeVideos.length;
+      const video = nodeVideos[current];
+      const box = nodeBoxes[current];
+
+      if (video) {
+        box.classList.add('is-playing');
+        video.play().then(() => {
+          isSequencePlaying = true;
+          updateButtonUI(true);
+        }).catch(err => {
+          box.classList.remove('is-playing');
+          isSequencePlaying = false;
+          updateButtonUI(false);
+        });
+      }
+    }
+
+    /* Chain sequence: when current video finishes, move to next */
     nodeVideos.forEach((video, i) => {
       video.addEventListener('ended', () => {
         video.currentTime = 0;
-        current = (i + 1) % nodeVideos.length;
-        playCurrent();
+        nodeBoxes[i].classList.remove('is-playing');
+        playIndex(i + 1);
+      });
+      video.addEventListener('play', () => {
+        nodeBoxes[i].classList.add('is-playing');
+      });
+      video.addEventListener('pause', () => {
+        nodeBoxes[i].classList.remove('is-playing');
       });
     });
 
-    const diagram = document.querySelector('#how .diagram') || nodeVideos[0];
+    /* Click handlers on each video node box */
+    nodeBoxes.forEach((box, i) => {
+      box.addEventListener('click', () => {
+        if (nodeVideos[i].paused) {
+          playIndex(i);
+        } else {
+          nodeVideos[i].pause();
+          isSequencePlaying = false;
+          updateButtonUI(false);
+        }
+      });
+
+      box.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          box.click();
+        }
+      });
+    });
+
+    /* Master play/pause sequence toggle button handler */
+    if (toggleDiagramBtn) {
+      toggleDiagramBtn.addEventListener('click', () => {
+        if (isSequencePlaying) {
+          stopAllVideos();
+        } else {
+          playIndex(current);
+        }
+      });
+    }
+
+    /* Intersection Observer for smooth in-viewport behavior */
+    const diagram = document.querySelector('#how .diagram') || nodeBoxes[0];
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           inView = entry.isIntersecting;
-          if (inView) playCurrent();
-          else nodeVideos[current].pause();
+          if (inView && !isSequencePlaying) {
+            playIndex(0);
+          } else if (!inView && isSequencePlaying) {
+            stopAllVideos();
+          }
         });
       }, { threshold: 0.35 });
       io.observe(diagram);
-    } else {
-      inView = true;
-      playCurrent();
     }
   }
 
